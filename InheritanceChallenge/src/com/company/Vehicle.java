@@ -5,16 +5,13 @@ package com.company;
  */
 public class Vehicle {
 
-    private int speed;
     private String name;
-
     private int currentVelocity = 0;
     private int currentDirection = 0;
 
     public Vehicle(String name) {
 
         this.name = name;
-
         this.currentVelocity = 0;
         this.currentDirection = 0;
     }
@@ -30,9 +27,6 @@ public class Vehicle {
         System.out.println("vehicle moving at " + currentVelocity + "in the direction " + currentDirection);
     }
 
-    public int getSpeed() {
-        return speed;
-    }
 
     public String getName() {
         return name;
