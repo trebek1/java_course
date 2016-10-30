@@ -25,7 +25,7 @@ public class PC {
     }
 
     private void drawLogo(){
-        // usually use composition before inheritance 
+        // usually use composition before inheritance
         // fancy graphics
         monitor.drawPixelAt(1200,1500,"red");
 
