@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 // extends is validation so that not all class types can be used bounded type parameters 
-public class Team<T extends Player> implements Comparable<Team<T>> { // string and integer use comparable
+public class Team<T extends Player & Coach & Manager> implements Comparable<Team<T>> { // string and integer use comparable
     // using interfaces you can extend from several different interfaces but only one class
     // for instance Team<T extends Player & Coach & Manager> is valid if Player, Coach and Manager are all interfaces or
     // only Player is class other 2 are interfaces
