@@ -4,20 +4,22 @@ package com.example.mypackage;
  * Created by Alex on 5/13/17.
  */
 public class StockItem implements Comparable<StockItem> {
+    private int reserved = 0;
     private final String name;
     private double price;
-    private int quantityStock = 0; // this can be initialized here
+    private int quantityInStock = 0; // this can be initialized here
 
     public StockItem(String name, double price) {
         this.name = name;
         this.price = price;
-        this.quantityStock = 0; // or here but not usually do both
+        this.quantityInStock = 0; // or here but not usually do both
+        this.reserved = reserved;
     }
 
-    public StockItem(String name, double price, int quantityStock){
+    public StockItem(String name, double price, int quantityInStock){
         this.name = name;
         this.price = price;
-        this.quantityStock = quantityStock;
+        this.quantityInStock = quantityInStock;
     }
 
     public String getName() {
@@ -28,8 +30,8 @@ public class StockItem implements Comparable<StockItem> {
         return price;
     }
 
-    public int quantityInStock() {
-        return quantityStock;
+    public int availableQuantity() {
+        return quantityInStock - reserved;
     }
 
     public void setPrice(double price) {
@@ -39,10 +41,26 @@ public class StockItem implements Comparable<StockItem> {
     }
 
     public void adjustStock(int quantity){
-        int newQuantity = this.quantityStock + quantity;
+        int newQuantity = this.quantityInStock + quantity;
         if(newQuantity > 0){
-            this.quantityStock = newQuantity;
+            this.quantityInStock = newQuantity;
         }
+    }
+
+    public int reserveStock(int quantity){
+        if(quantity <= availableQuantity()){ // use the method not the field
+            reserved += quantity;
+            return quantity;
+        }
+        return 0;
+    }
+
+    public int unreserveStock(int quantity){
+        if(quantity <= reserved){
+            reserved -= quantity;
+            return quantity;
+        }
+        return 0;
     }
 
     @Override
@@ -56,6 +74,15 @@ public class StockItem implements Comparable<StockItem> {
         }
         String objName = ((StockItem) obj).getName();
         return this.name.equals(objName);
+    }
+
+    public int finalizeStock(int quantity){
+        if(quantity <= reserved){
+            quantityInStock -= quantity;
+            reserved -= quantity;
+            return quantity;
+        }
+        return 0;
     }
 
     @Override
@@ -79,7 +106,7 @@ public class StockItem implements Comparable<StockItem> {
 
     @Override
     public String toString() {
-        return this.name + " : price " + this.price;
+        return this.name + " : price " + this.price + " reserved " + this.reserved;
     }
 }
 
