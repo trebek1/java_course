@@ -79,7 +79,7 @@ public class Main {
                     // timeout so if thread does not terminate, will continue after timeout time
                     anotherThread.join(2000);
                     // thread class also lets you set priority but not all OS support it
-                    
+
                     System.out.println(ANSI_PURPLE + "Another thread terminated or timed out so i'm running again");
                 }catch(InterruptedException e){
                     System.out.println(ANSI_PURPLE + "I couldn't wait afrerall. I was interrupted ");
