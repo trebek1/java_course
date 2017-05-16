@@ -15,7 +15,7 @@ public class Main {
 
     // some collections arent thread safe (arrayList)
     // we must synchronize code that uses arrayList
-     
+
 
     public static void main(String[] args) {
         // causes a deadlock without wait and notify, Writer holds lock for message object
