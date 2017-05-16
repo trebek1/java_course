@@ -3,6 +3,7 @@ package com.example.mypackage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.example.mypackage.Main.EOF;
@@ -17,13 +18,45 @@ public class Main {
 	    // not all implementations of lock are reentrant
         // all threads need to compete for same lock to prevent thread interference
 
-	        MyProducer producer = new MyProducer(buffer, ThreadColor.ANSI_YELLOW, bufferLock);
+
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+
+
+
+        MyProducer producer = new MyProducer(buffer, ThreadColor.ANSI_YELLOW, bufferLock);
 	    MyConsumer consumer1 = new MyConsumer(buffer, ThreadColor.ANSI_PURPLE, bufferLock);
 	    MyConsumer consumer2 = new MyConsumer(buffer, ThreadColor.ANSI_CYAN, bufferLock);
 
-	    new Thread(producer).start();
-	    new Thread(consumer1).start();
-	    new Thread(consumer2).start();
+        // new Thread(producer).start();
+        // new Thread(consumer1).start();
+        // new Thread(consumer2).start();
+
+        //Using ExecutorService package instead of the above
+        executorService.execute(producer);
+        executorService.execute(consumer1);
+        executorService.execute(consumer2);
+
+        // submit method to recieve a message back from a thread
+        Future<String> future = executorService.submit(new Callable<String>(){
+         @Override
+            public String call() throws Exception{
+             System.out.println(ThreadColor.ANSI_GREEN + "I'm being printed frm the callable class");
+             return "This is the callable result";
+            }
+        });
+        try{
+            // /blocks until result is available 
+            System.out.println(future.get());
+        }catch(ExecutionException e){
+            System.out.println("Something went wrong ");
+        }catch(InterruptedException e){
+            System.out.println("Thread running task was interrupted");
+        }
+        // Have to remember to terminate the application manually
+        executorService.shutdown();
+        // Wont shut down until all threads are done running
+
     }
 }
 
@@ -132,7 +165,7 @@ class MyConsumer implements Runnable{
 
 // cant release lock until lock count = 0
 
-// use a try finaly block to call unlock in one place
+// use a try finally block to call unlock in one place
 //  code in critical section could throw exception not explicitly handled in try catch
 
 //java.lang.IllegalMonitorStateException if try to unlock a lock that the object doesnt own
@@ -142,3 +175,19 @@ class MyConsumer implements Runnable{
 // getQueuedLength method returns number of waiting threads
 
 // lock API http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/Lock.html
+
+// executor service implementation --> give list of things to be done, dont worry about
+// how they will be done
+
+// thread pool --> managed set of threads
+// reduces overhead of thread creatation
+// manage number of active threads
+// thread pools keep application from running lots of threads and getting blocked
+
+// execute method in executor service interface
+// execute is replacement for : (new Thread(r)).start();
+// using execute: ex.execute(r);    \
+
+// Fixed Thread pool : specific # of threads available to do tasks at one time
+// Other tasks wait in a queue
+
