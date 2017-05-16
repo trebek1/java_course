@@ -9,8 +9,16 @@ public class Main {
 
     // thread cant be suspended while doing atomic operations
     // setting a value to a variable for instance
+    // reading and writing reference variables
+    // reading and writing primitive vars except long and doubles
+    // read and write all variables declared volatile
+
+    // some collections arent thread safe (arrayList)
+    // we must synchronize code that uses arrayList
+     
 
     public static void main(String[] args) {
+        // causes a deadlock without wait and notify, Writer holds lock for message object
         Message message = new Message();
         (new Thread(new Writer(message))).start();
         (new Thread(new Reader(message))).start();
@@ -23,6 +31,7 @@ class Message {
 
     // consumer to read a message
     public synchronized String read(){
+        // loop until there is a message to read. Then we return each message
         while(empty){
             try{
                 wait();
@@ -31,12 +40,14 @@ class Message {
             }
         }
         empty = true;
+        // waiting threads can now be executed  T?his is no longer waiting here
         notifyAll();
         return message;
     }
 
     // producer to write a message
     public synchronized void write(String message){
+        // want consumer to read all messages before writing more so we loop until empty
         while(!empty){
             try{
                 wait();
@@ -46,7 +57,7 @@ class Message {
         }
         empty = false;
         this.message = message;
-        notifyAll();
+       notifyAll();
     }
 }
 
