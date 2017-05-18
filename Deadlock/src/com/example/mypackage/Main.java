@@ -63,6 +63,39 @@ public class Main {
 // require 1 then 2 and the other require 2 then 1
 // other solution is to use the Lock object instead of using synchronized block
 
+//------------------------------------------------------------------
+// Another deadlock is when we have 2 classes with synchronized code
+// each class calls a method in the other class
+
+//Something like this
+// Data data = new Data();
+// Display display = new Display();
+// data.setDisplay(display);
+// display.setData(data);
+
+// remember no other thread can run a synchronized method using
+// the same object until the first thread exits
+
+// if Thread1 calls Data.updateData();
+// while the other thread Thread2 calls Display.updateDisplay()
+// The following could happen
+// thread 1 enters data.updateData() and writes to console and susupends
+// thread 2 enters display.updateDisplay() writes to console and suspends
+
+// thread1 runs and tries to call display.dataChanged() but thread1 is still running display.updateDisplay()
+// and is holding the lock for display object
+
+// thread 2 does the same and thread1 is hold lock for data object
+// This is the same order problem as before. They need to be called in the same order
+// pass values to parameters instead of calling methods
+
+//------------------------------------------------------------
+
+
+
+
+
+
 
 
 
