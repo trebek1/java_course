@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         new Thread1().start();
-        new Thread2().start(); 
+        new Thread2().start();
     }
 
     // private inner class
@@ -33,20 +33,20 @@ public class Main {
 
     private static class Thread2 extends Thread{
             public void run(){
-                synchronized(lock2){
-                    System.out.println("Thread 2 has lock2");
+                synchronized(lock1){
+                    System.out.println("Thread 2 has lock1");
                     try{
                         Thread.sleep(100);
                     }catch(InterruptedException e){
 
                     }
-                    System.out.println("Thread 2 waiting for lock1");
-                    synchronized(lock1){
-                        System.out.println("Thread 2 has lock1");
+                    System.out.println("Thread 2 waiting for lock2");
+                    synchronized(lock2){
+                        System.out.println("Thread 2 has lock2");
                     }
-                    System.out.println( "thread 2 released lock1");
+                    System.out.println( "thread 2 released lock2");
                 }
-                System.out.println( "Thread 2 released lock 2. Exiting...");
+                System.out.println( "Thread 2 released lock 1. E    xiting...");
             }
     }
 }
@@ -56,5 +56,14 @@ public class Main {
 //Deadlock --> two or more threads blocked by locks
 // and each blocked thread is holding a lock that another thread needs
 // none of waiting threads will ever run
+
+// solutions
+// only lock on a single object (plan better)
+// require locks in same order (1 then 2) dont have one thread
+// require 1 then 2 and the other require 2 then 1
+// other solution is to use the Lock object instead of using synchronized block
+
+
+
 
 
