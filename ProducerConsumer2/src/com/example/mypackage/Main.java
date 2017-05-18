@@ -46,7 +46,7 @@ public class Main {
             }
         });
         try{
-            // /blocks until result is available 
+            // /blocks until result is available
             System.out.println(future.get());
         }catch(ExecutionException e){
             System.out.println("Something went wrong ");
