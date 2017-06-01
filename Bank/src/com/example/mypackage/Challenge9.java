@@ -46,7 +46,7 @@ public class Challenge9 {
                         // wait for student to arrive
                         this.wait();
                         // wait causes code to release lock even though in sync block temporarily
-                        // this causes a deadlock 
+                        // this causes a deadlock
                     } catch (InterruptedException e) {
 
                     }
