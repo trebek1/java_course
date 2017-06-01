@@ -2,7 +2,10 @@ package com.example.mypackage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.function.IntPredicate;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class Main {
 
@@ -23,6 +26,41 @@ public class Main {
         employees.add(charming);
 
         printEmployeesByAge(employees, "employees over 30", employee -> employee.getAge() > 30);
+        printEmployeesByAge(employees, "employees > 30", new Predicate<Employee>() {
+            @Override
+            public boolean test(Employee employee) {
+                return employee.getAge() > 30;
+            }
+        });
+
+        IntPredicate intp = i -> i > 15;
+        IntPredicate intd = i -> i < 100;
+
+        System.out.println(intp.test(10));
+
+        // can reuse predicates
+        int a = 20;
+        System.out.println(intp.test(a + 5));
+
+        // can chain predicates
+        System.out.println(intp.and(intd).test(50));
+        // or and negate as well
+
+        Random random = new Random();
+        for(int i =0; i<10; i++){
+            System.out.println(random.nextInt());
+        }
+
+        //supplier interface
+        // supplier always return a value
+
+        // needs expected return type (integer here) since returns a value
+        Supplier<Integer> randomSupplier = () -> random.nextInt(1000);
+        for(int i =0; i<10; i++){
+            System.out.println(randomSupplier.get());
+        }
+
+
         System.out.println("XXXXXXXXXXXX");
 
         // consumer is functional interface with method accept
