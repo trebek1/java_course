@@ -75,11 +75,6 @@ public class Main {
         // peek lets you print out the items without ending the stream
 
 
-
-
-
-
-
     }
 }
 // stream is set of object refs
