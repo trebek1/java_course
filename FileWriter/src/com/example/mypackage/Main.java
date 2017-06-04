@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+    //Collossal Cave Game
     private static Locations locations = new Locations();
 
     public static void main(String[] args) {
@@ -27,7 +28,7 @@ public class Main {
         vocabulary.put("EAST", "E");
 
 
-        int loc = 1;
+        int loc = 64;
         while(true) {
             System.out.println(locations.get(loc).getDescription());
 
