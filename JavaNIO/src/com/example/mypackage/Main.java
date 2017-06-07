@@ -2,6 +2,7 @@ package com.example.mypackage;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
@@ -65,7 +66,7 @@ public class Main {
 
             // always call when you need to reset buffer position to zero
             // call when flipping from reading to writing
-            
+
             intBuffer.flip();
             intBuffer.putInt(-98765);
             intBuffer.flip(); // reset position to zero
@@ -73,6 +74,53 @@ public class Main {
             System.out.println("num bytes written was " + numBytes);
 
             // now close channel and stream unless using try with resources
+
+            //READ DATA BACK INTO APPLICATION
+
+            //writeUTF writes length so reader knows how many to read back
+
+//            RandomAccessFile ra = new RandomAccessFile("data.dat", "rwd");
+//            byte[] b = new byte[outputBytes.length];
+//            ra.read(b);
+//            System.out.println(new String(b));
+//
+//            long int1 = ra.readInt();
+//            long int2 = ra.readInt();
+//
+//            System.out.println("int1 " + int1);
+//            System.out.println("int 2 " + int2);
+
+            // can use different IO package to read the file that was created
+
+            //NOW LETS READ WITH JAVA NIO
+
+            RandomAccessFile ra = new RandomAccessFile("data.dat", "rwd");
+            FileChannel channel = ra.getChannel();
+            outputBytes[0] = 'a';
+            outputBytes[1] = 'b';
+            buffer.flip();
+            // outputBytes was never loaded into the buffer after being updated so flipping it resets it to prev value 
+            long numBytesRead = channel.read(buffer);
+
+            if(buffer.hasArray()){
+                System.out.println("byte buffer = " + new String(buffer.array()));
+            }
+
+            //flip between each access of the buffer
+
+            intBuffer.flip();
+            numBytesRead = channel.read(intBuffer);
+            intBuffer.flip();
+            System.out.println(intBuffer.getInt()); // could pass index to getInt to avoid calling flip
+            intBuffer.flip();
+            numBytesRead = channel.read(intBuffer);
+            System.out.println(intBuffer.getInt(0));
+            channel.close();
+            ra.close();
+
+            System.out.println("outputBytes =  " + new String(outputBytes));
+
+
 
 
 
