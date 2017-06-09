@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 
 public class Main {
 
@@ -34,11 +35,54 @@ public class Main {
 
             //Delete a file
 
-            Path fileToDelete = FileSystems.getDefault().getPath("Examples", "Dir1", "file1copy.txt");
-            Files.delete(fileToDelete);
+//            Path fileToDelete = FileSystems.getDefault().getPath("Examples", "Dir1", "file1copy.txt");
+//            Files.delete(fileToDelete);
             //can use deleteIfExists to keep errors from coming up
 
-            
+
+            // creating files without a channel
+
+//            Path fileToCreate = FileSystems.getDefault().getPath("Examples", "file2.txt");
+//            Files.createFile(fileToCreate);
+            // would need to create a stream or channel to write to it
+            // cant use this createFile to create directory
+
+//            Path dirToCreate = FileSystems.getDefault().getPath("Examples", "Dir4");
+//            Files.createDirectory(dirToCreate);
+
+            //Creates a whole path of directories if they dont exist yet
+//            Path dirToCreate = FileSystems.getDefault().getPath("Examples", "Dir2/Dir3/Dir4/Dir5/Dir6");
+//            Files.createDirectories(dirToCreate);
+
+            // could also do...
+//            Path dirToCreate = FileSystems.getDefault().getPath("Examples/Dir2/Dir3/Dir4/Dir5/Dir6/Dir7");
+//            Files.createDirectory(dirToCreate);
+
+            // how do you get file metadata
+            // can get single attribute or all attributes at once
+
+            // single
+            Path filePath = FileSystems.getDefault().getPath("Examples", "Dir1/file1.txt");
+            // size of file
+            long size = Files.size(filePath);
+            System.out.println("Size is equal to " + size);
+            System.out.println("last modified equals "+ Files.getLastModifiedTime(filePath));
+            // rest of methods in documentation
+
+            // get all attributes in one single call
+            // common to all OS
+
+            BasicFileAttributes attrs = Files.readAttributes(filePath, BasicFileAttributes.class);
+
+            //attrs is an instance that is returned with basic file attributes
+            System.out.println("Size = " + attrs.size());
+            System.out.println("last mod " + attrs.lastModifiedTime());
+            System.out.println("Created " + attrs.creationTime());
+
+
+
+
+
 
 
 
