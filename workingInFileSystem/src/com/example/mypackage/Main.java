@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Main {
 
@@ -26,6 +27,10 @@ public class Main {
 
         Path path3 = FileSystems.getDefault().getPath("../OutThere.txt");
         printFile(path3);
+
+        // absolute path example 
+        Path path4 = Paths.get("/Users/Merlin/code/java_course/OutThere.txt");
+        printFile(path4);
 
     }
 
