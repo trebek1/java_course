@@ -106,7 +106,54 @@ public class Main {
         try{
             Files.walkFileTree(dir2Path, new CopyFiles(dir2Path, copyPath));
         }catch(IOException e){
-            System.out.println( e.getMessage());
+            System.out.println(e.getMessage());
         }
+
+
+        // Map Java.IO to Jva.NIO
+
+        //Mapping one to the other (File --> Path)
+
+        File file = new File("/Examples/file.txt"); // Java IO
+        Path convertedPath = file.toPath(); // java NIO
+        System.out.println("convrted path is " + convertedPath);
+
+        File parent = new File("/Examples");
+        File resolvedFile = new File(parent,"dir/file.txt");
+        System.out.println(resolvedFile.toPath());
+
+        resolvedFile = new File("/Examples", "dir/file.txt"); // IO
+        System.out.println(resolvedFile.toPath()); // NIO
+
+        Path parentPath = Paths.get("/Examples");
+        Path childRelativePath = Paths.get("dir/file.txt");
+        System.out.println(parentPath.resolve(childRelativePath));
+
+        // java IO needs file instances
+        // NIO usually doesnt
+
+        File workingDirectory = new File("").getAbsoluteFile(); // IO
+        System.out.println("wd = " + workingDirectory.getAbsolutePath()); // NIO
+
+        // way you list contents of directory
+
+        // IO File.list
+        // NIO Stream
+
+        System.out.println(" ---- print dir2 contents using list ----");
+        //only returns first level
+        File dir2File = new File(workingDirectory, "/FileTree/Dir2");
+        String[] dir2Contents = dir2File.list();
+        for(int i = 0; i<dir2Contents.length; i++){
+            System.out.println("i= "+ i + ": " + dir2Contents[i]);
+        }
+
+        System.out.println("---Print dir2 contents using listFiles ---");
+        File[] dir2Files = dir2File.listFiles();
+        for(int i = 0; i<dir2Files.length; i++){
+            System.out.println("i= " + i + ": " + dir2Files[i].getName());
+        }
+        //NIO with file system
+        //IO still better with reading and writing file contents
      }
 }
