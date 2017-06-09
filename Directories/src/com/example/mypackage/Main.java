@@ -98,6 +98,15 @@ public class Main {
 
         //preVisitDirectory --> copy a file tree (handle root before its sibs so that it exists)
         //postVisitDirectory --> delete a node, delete descendants before delete directory
-            
+
+        System.out.println("--- Copy Dir2 to Dir4/Dir2Copy---");
+        Path copyPath = FileSystems.getDefault().getPath("FileTree" + File.separator + "Dir4" + File.separator + "Dir2Copy");
+        //FileTree/Dir4/Dir2Copy
+
+        try{
+            Files.walkFileTree(dir2Path, new CopyFiles(dir2Path, copyPath));
+        }catch(IOException e){
+            System.out.println( e.getMessage());
+        }
      }
 }
