@@ -80,12 +80,6 @@ public class Main {
             System.out.println("Created " + attrs.creationTime());
 
 
-
-
-
-
-
-
         }catch(IOException e){
             System.out.println(e.getMessage());
 
