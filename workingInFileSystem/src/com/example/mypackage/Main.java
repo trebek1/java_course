@@ -10,13 +10,41 @@ public class Main {
     public static void main(String[] args) {
 
         try{
-            //FileSystems.getDefault returns user.dir 
-            Path sourceFile = FileSystems.getDefault().getPath("Examples", "File1.txt");
-            Path copyFile = FileSystems.getDefault().getPath("Examples", "file1copy.txt");
-            Files.copy(sourceFile, copyFile);
+            //FileSystems.getDefault returns user.dir
+//            Path sourceFile = FileSystems.getDefault().getPath("Examples", "File1.txt");
+//            Path copyFile = FileSystems.getDefault().getPath("Examples", "file1copy.txt");
+//            Files.copy(sourceFile, copyFile, StandardCopyOption.REPLACE_EXISTING);
+//            // StandardCopyOption keeps error from being thrown
+//
+//            sourceFile = FileSystems.getDefault().getPath("Examples", "Dir1");
+//            copyFile = FileSystems.getDefault().getPath("Examples", "Dir4");
+//            // only copies whole folder, not the files inside
+//            Files.copy(sourceFile, copyFile);
+
+//            Path fileToMove = FileSystems.getDefault().getPath("Examples", "file1copy.txt");
+//            Path destination = FileSystems.getDefault().getPath("Examples", "Dir1", "file1copy.txt");
+//            // have to specify whole destination including the filename in destination
+//
+//            Files.move(fileToMove, destination);
+
+            // Renaming a file in the file system
+//            Path fileToMove = FileSystems.getDefault().getPath("Examples", "File1.txt");
+//            Path destination = FileSystems.getDefault().getPath("Examples", "starcraft.txt");
+//            Files.move(fileToMove, destination);
+
+            //Delete a file
+
+            Path fileToDelete = FileSystems.getDefault().getPath("Examples", "Dir1", "file1copy.txt");
+            Files.delete(fileToDelete);
+            //can use deleteIfExists to keep errors from coming up
+
+            
+
+
 
         }catch(IOException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+
         }
 
 
