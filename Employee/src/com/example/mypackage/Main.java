@@ -104,7 +104,6 @@ public class Main {
         String upperName = upperCase.apply(employees.get(0));
         System.out.println(concatAge.apply(upperName, employees.get(0)) + " BBBBBBBBBBBBB");
 
-
         // Unary operator -- returns same type as input
 
         IntUnaryOperator intBy5 = i -> i + 5;
@@ -115,8 +114,6 @@ public class Main {
         Consumer<String> c1 = s -> s.toUpperCase();
         Consumer<String> c2 = s -> System.out.println(s);
         c1.andThen(c2).accept("Hello World");
-
-
 
         System.out.println("XXXXXXXXXXXX");
 

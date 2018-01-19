@@ -82,7 +82,7 @@ public class Main {
 
                     System.out.println(ANSI_PURPLE + "Another thread terminated or timed out so i'm running again");
                 }catch(InterruptedException e){
-                    System.out.println(ANSI_PURPLE + "I couldn't wait afrerall. I was interrupted ");
+                    System.out.println(ANSI_PURPLE + "I couldn't wait after all. I was interrupted ");
 
                 }
             }

@@ -11,12 +11,6 @@ public class Main {
     // one thread could take a long time (no fairness in scheduling)
     // fairlocks are slower than having no fairness due to extra processing
 
-
-
-
-
-
-
     // Thread starvation is due to thread priority
     // Thread isnt ever given a chance to run
     // isnt first come first served for threads

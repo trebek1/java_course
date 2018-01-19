@@ -65,7 +65,7 @@ class Countdown {
         // synchronization is reentrant --> if a thread acquires lock in synchronized code calls method that is
         // also synchronized, method can keep executing since object already has the lock
 
-        // critical section is a piece of code that references a shared resouce like a var
+        // critical section is a piece of code that references a shared resource like a var
         // only one thread at a time should be able to execute a critical section at a time
 
         //Thread safe: dev has synchronized all critical sections in code so we dont have to worry about thread interference

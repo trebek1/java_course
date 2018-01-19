@@ -17,7 +17,6 @@ public class Locations implements Map<Integer, Location> {
         // checked and unchecked exceptions
         // cant ignore checked exceptions
         // ioexception is a checked exception
-
         // try with resources makes sure that filewriter stream is closed whether operates normally or exception occurs
         // java 7
         // also makes sure first error is the one thrown back up the stream

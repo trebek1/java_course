@@ -7,7 +7,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+	    // write your code here
         // easier way to work with interfaces with one method
 
 //        new Thread(new CodeToRun()).start();
@@ -119,7 +119,7 @@ public class Main {
 
 
 
-    public final static String doStringStuff(UpperConcat uc, String s1, String s2){
+    public static final String doStringStuff(UpperConcat uc, String s1, String s2){
         return uc.upperAndConcat(s1,s2);
     };
 

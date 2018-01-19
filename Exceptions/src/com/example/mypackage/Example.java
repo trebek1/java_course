@@ -22,16 +22,16 @@ public class Example {
     private static int divide(){
         int x;
         int y;
-       // try{
+        try{
             x = getInt();
             y = getInt();
             return x/y;
-       // }catch(NoSuchElementException e){
-        // simplifies the stack trace
-        //    throw new NoSuchElementException(   "no suitable data");
-        //}catch(ArithmeticException e){
-        //  throw new ArithmeticException("attempt to divide by zero");
-        //}
+        }catch(NoSuchElementException e){
+         //simplifies the stack trace
+            throw new NoSuchElementException("no suitable data");
+        }catch(ArithmeticException e){
+          throw new ArithmeticException("attempt to divide by zero");
+        }
     }
 
     private static int getInt(){
@@ -49,10 +49,10 @@ public class Example {
     }
 }
 
+// exception is a subclass of throwable
 // Thrown exceptions are passed up through calling methods
 // until the program finds one that can handle the exception
 
 // All exception objects hold the call stack trace
 // all particular exceptions are subclasses of exception
-// exception is a subclass of throwable
 // throwing exceptions reduces stack trace code

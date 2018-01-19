@@ -19,11 +19,11 @@ public class Main {
         ExecutorService executorService = Executors.newFixedThreadPool(3);
 
 
-//        MyProducer producer = new MyProducer(buffer, ThreadColor.ANSI_YELLOW, bufferLock);
+//      MyProducer producer = new MyProducer(buffer, ThreadColor.ANSI_YELLOW, bufferLock);
 //	    MyConsumer consumer1 = new MyConsumer(buffer, ThreadColor.ANSI_PURPLE, bufferLock);
 //	    MyConsumer consumer2 = new MyConsumer(buffer, ThreadColor.ANSI_CYAN, bufferLock);
 
-        MyProducer producer = new MyProducer(buffer, ThreadColor.ANSI_YELLOW    );
+        MyProducer producer = new MyProducer(buffer, ThreadColor.ANSI_YELLOW);
 	    MyConsumer consumer1 = new MyConsumer(buffer, ThreadColor.ANSI_PURPLE);
 	    MyConsumer consumer2 = new MyConsumer(buffer, ThreadColor.ANSI_CYAN);
 
